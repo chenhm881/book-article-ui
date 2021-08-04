@@ -1,90 +1,69 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the <Button></Button>
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <a-input v-model:value="value" placeholder="Basic usage" />
-  </div>
+  <a-form :model="formState" :label-col="labelCol" :wrapper-col="wrapperCol">
+    <a-form-item label="Files directory">
+      <a-input v-model:value="formState.name" />
+    </a-form-item>
+    <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
+      <a-button type="primary" @click="onSubmit">Create</a-button>
+      <a-button style="margin-left: 10px">Cancel</a-button>
+    </a-form-item>
+  </a-form>
 </template>
-
-<script>
+<script lang="ts">
+import { Moment } from 'moment';
+import {defineComponent, reactive, ref, toRaw, UnwrapRef} from 'vue';
+import {Input, Form, Button, FormItem} from "ant-design-vue";
 import axios from "axios";
-import  { Button, Input } from 'ant-design-vue';
-import  { ref } from 'vue';
-import 'ant-design-vue/dist/antd.css';
 
-
-export default {
-  setup() {
-    const value = ref('');
-    return {
-      value,
-      checked: ref(false),
-    };
-  },
+interface FormState {
+  name: string;
+  region: string | undefined;
+  date1: Moment | undefined;
+  delivery: boolean;
+  type: string[];
+  resource: string;
+  desc: string;
+}
+export default defineComponent({
   name: 'AddFiles',
   components: {
-    Button,
     'a-input': Input,
+    'a-form': Form,
+    'a-button': Button,
+    'a-form-item': FormItem,
   },
-  props: {
-    msg: String
-  },
-  data: () => ({
-    loading: true,
-    form: {
-      location: ''
-    },
-    rules: {
-      location: [
-        { required: true, message: 'Please enter location', trigger: 'blur' }
-      ]
-    }
-  }),
-
-  methods: {
-    onSubmit() {
-          axios.post(
-              'https://engineermc$env$.oneforma.com:8080/api/scanningOnDemand',
-              JSON.stringify({
-                projectId: 11,
-                location: this.form.location
-              }),
-              {timeout: 86400000, headers: {'Content-type': "application/json", "dataType": "json"}}
-          ).then(response => {
-            this.loading = response;
-          }).catch(error => {
-            if (axios.isCancel(error)) {
-              console.log("Request cancelled. Error: ", error.message);
-            } else {
-              console.log("Response failure. Error: " + error);
-            }
+  setup() {
+    let info = ref("");
+    const formState: UnwrapRef<FormState> = reactive({
+      name: '',
+      region: undefined,
+      date1: undefined,
+      delivery: false,
+      type: [],
+      resource: '',
+      desc: '',
+    });
+    const onSubmit = () => {
+      console.log('submit!', toRaw(formState));
+      axios
+          .post('https://api.coindesk.com/v1/bpi/currentprice.json',
+              toRaw(formState),
+              {timeout: 86400000, headers: {
+                'Content-type': "application/json",
+                  "dataType": "json",
+              }})
+          .then((response: any) => {
+             alert(JSON.stringify(response));
           })
-        }
+    }
+    return {
+      labelCol: { span: 4 },
+      wrapperCol: { span: 14 },
+      formState,
+      onSubmit,
+      info
+    };
   },
-  created() {
-  }
-}
+});
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>

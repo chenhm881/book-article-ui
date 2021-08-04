@@ -1,18 +1,28 @@
 <template>
   <div class="manage-container">
     <AsideMenu :isOpen="isOpen" @modifyIsOpen="setIsOpen" />
+    <div class="manage-main">
+      <AsideHeader :isOpen="isOpen"></AsideHeader>
+      <div class="manage-content">
+        <div class="common-part">
+        </div>
+        <AddFiles/>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import AsideMenu from '../components/aside/AsideMenu.vue'
+import AsideMenu from '../components/aside/AsideMenu.vue';
+import AsideHeader from "../components/aside/AsideHeader.vue";
+import AddFiles from '../components/AddFiles.vue';
 
 
 export default {
 
   setup() {
     let isOpen = true
-    const setIsOpen = (val: boolean) => {
+    const setIsOpen = (val: boolean): void => {
       isOpen = val
       console.log(val);
     };
@@ -23,7 +33,9 @@ export default {
   },
   name: 'Index',
   components: {
-    AsideMenu
+    AsideMenu,
+    AsideHeader,
+    AddFiles
   },
 }
 

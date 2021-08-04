@@ -1,26 +1,15 @@
 import { createApp, h } from 'vue'
-// @ts-ignore
-import App from './pages/App.vue'
-// @ts-ignore
-import About from './pages/Index.vue'
+
+import {routes} from './router/index'
 
 
 const NotFoundComponent = { template: '<p>Page not found</p>' }
 
 
-const AboutComponent = About
-
-
-const routes: {[key: string] : any} = {
-    '/': App,
-    '/about': AboutComponent
-}
-
 const SimpleRouterApp: any = {
 
     data: () => ({
         currentRoute: window.location.pathname
-
     }),
 
     computed: {
