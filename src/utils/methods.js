@@ -1,10 +1,10 @@
 
-export function getParamByName(name: string, url: string) {
-    const match = RegExp('[?#]' + name + '=([^&]*)').exec(url);
+export function getParamByName(name, url) {
+    const match = RegExp('[?&]' + name + '=([^&]*)').exec(url);
     return match && decodeURIComponent(match[1].replace(/\+/g, ' ').replace('#', ''));
 }
 
-export function getCookie(name: string) {
+export function getCookie(name) {
     let value = undefined;
     let arr, reg = new RegExp("(^| )"+name+"=([^;]*)(;|$)");
     arr = document.cookie.match(reg);
@@ -14,17 +14,14 @@ export function getCookie(name: string) {
     return value;
 }
 
-export function getAttributeFromCookie(name: string, attribute: string) {
+export function getAttributeFromCookie(name, attribute) {
     let value = undefined;
     let arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
     arr = document.cookie.match(reg);
     if (document.cookie.match(reg)) {
-        if (arr) {
-            value = unescape(arr[2]);
-        }
+        value = unescape(arr[2]);
     }
 
-    // eslint-disable-next-line no-constant-condition
     return value ? [function () {
         try {
             JSON.parse(value)[attribute];

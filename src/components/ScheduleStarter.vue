@@ -1,6 +1,6 @@
 <template>
   <a-form :model="formState" :label-col="labelCol" :wrapper-col="wrapperCol">
-    <a-form-item label="Files directory">
+    <a-form-item label="Files schedule">
       <a-input v-model:value="formState.location" />
     </a-form-item>
     <a-form-item :wrapper-col="{ span: 14, offset: 4 }">

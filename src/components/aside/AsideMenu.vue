@@ -46,6 +46,7 @@ import  {onMounted, ref } from 'vue';
 import 'ant-design-vue/dist/antd.css';
 import { PlusOutlined } from "@ant-design/icons-vue";
 import { toRef } from 'vue';
+import { useRouter } from 'vue-router'
 
 
 
@@ -58,73 +59,29 @@ interface MenuObj {
 
 export default {
   setup(props: any, context: any) {
-
+    const router = useRouter()
     const menu = [
       {
-        title: '表单页',
-        key: 'form',
-        icon: 'form',
+        title: '文件管理',
+        key: 'file',
+        icon: 'file',
         children: [
           {
-            title: '基础表单',
-            key: 'form-base',
+            title: '手动扫描',
+            key: 'manual-scan',
             icon: ''
           },
           {
-            title: '分步表单',
-            key: 'form-step',
-            icon: ''
-          },
-          {
-            title: '高级表单',
-            key: 'form-senior',
+            title: '定时扫描',
+            key: 'schedule-scan',
             icon: ''
           }
         ]
       },
       {
-        title: '列表页',
+        title: '待定',
         key: 'list',
         icon: 'bars',
-        children: [
-          {
-            title: '搜索列表',
-            key: 'list-search',
-            icon: '',
-            children: [
-              {
-                title: '搜索列表(文章)',
-                key: 'list-search-article',
-                icon: ''
-              },
-              {
-                title: '搜索列表(项目)',
-                key: 'list-search-project',
-                icon: ''
-              },
-              {
-                title: '搜索列表(应用)',
-                key: 'list-search-application',
-                icon: ''
-              }
-            ]
-          },
-          {
-            title: '查询表格',
-            key: 'list-table',
-            icon: ''
-          },
-          {
-            title: '标准列表',
-            key: 'list-standard',
-            icon: ''
-          },
-          {
-            title: '卡片列表',
-            key: 'list-card',
-            icon: ''
-          }
-        ]
       }
     ]
 
@@ -145,7 +102,7 @@ export default {
       let arr = getArrByActive(menu, item.key, 'key')
 
       if (arr && arr.length) {
-        //this.$router.push('/' + arr.join('/'))
+        router.push('/' + arr.join('/'))
       } else {
         // 特殊情况的处理
       }
@@ -155,7 +112,8 @@ export default {
       value,
       checked: ref(false),
       setCollapse,
-      selectMenu
+      selectMenu,
+      menu
     };
   },
   name: 'AsideMenu',
@@ -175,74 +133,6 @@ export default {
       logoHalf: "",
       current: [],
       openKeys:[],
-      menu: [
-        {
-          title: '表单页',
-          key: 'form',
-          icon: 'form',
-          children: [
-            {
-              title: '基础表单',
-              key: 'form-base',
-              icon: ''
-            },
-            {
-              title: '分步表单',
-              key: 'form-step',
-              icon: ''
-            },
-            {
-              title: '高级表单',
-              key: 'form-senior',
-              icon: ''
-            }
-          ]
-        },
-        {
-          title: '列表页',
-          key: 'list',
-          icon: 'bars',
-          children: [
-            {
-              title: '搜索列表',
-              key: 'list-search',
-              icon: '',
-              children: [
-                {
-                  title: '搜索列表(文章)',
-                  key: 'list-search-article',
-                  icon: ''
-                },
-                {
-                  title: '搜索列表(项目)',
-                  key: 'list-search-project',
-                  icon: ''
-                },
-                {
-                  title: '搜索列表(应用)',
-                  key: 'list-search-application',
-                  icon: ''
-                }
-              ]
-            },
-            {
-              title: '查询表格',
-              key: 'list-table',
-              icon: ''
-            },
-            {
-              title: '标准列表',
-              key: 'list-standard',
-              icon: ''
-            },
-            {
-              title: '卡片列表',
-              key: 'list-card',
-              icon: ''
-            }
-          ]
-        }
-      ]
     }
   },
 

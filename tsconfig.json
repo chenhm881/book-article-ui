@@ -15,6 +15,12 @@
      "emitDecoratorMetadata": true,           /* Enables experimental support for emitting type metadata for decorators. */
 
     "noImplicitThis": false,
-    "allowJs": true
+    "allowJs": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    }
   },
 }

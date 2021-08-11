@@ -1,27 +1,29 @@
 <template>
-  <img alt="Vue logo" src="src/assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <a-locale-provider :locale="locale" id="app">
+    <router-view/>
+  </a-locale-provider>
 </template>
 
 <script>
-import HelloWorld from '../components/HelloWorld.vue'
 
+import { LocaleProvider } from 'ant-design-vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    'a-locale-provider': LocaleProvider
   }
 }
 
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="less">
+*{
+  padding: 0;
+  margin: 0;
+}
+html,
+body,
+#app{
+  height: 100%;
 }
 </style>

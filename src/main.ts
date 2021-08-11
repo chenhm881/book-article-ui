@@ -1,6 +1,7 @@
 import { createApp, h } from 'vue'
+import App from '@/pages/App.vue'
 
-import {routes} from './router/index'
+import router from './router'
 
 
 const NotFoundComponent = { template: '<p>Page not found</p>' }
@@ -15,7 +16,7 @@ const SimpleRouterApp: any = {
     computed: {
         CurrentComponent(): any {
             // @ts-ignore
-            return routes[this.currentRoute] || NotFoundComponent
+            return router[this.currentRoute] || NotFoundComponent
         }
     },
 
@@ -32,5 +33,4 @@ const SimpleRouterApp: any = {
 
 export default SimpleRouterApp;
 
-
-createApp(SimpleRouterApp).mount('#app')
+createApp(App).use(router).mount('#app')

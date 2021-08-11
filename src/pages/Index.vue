@@ -6,7 +6,7 @@
       <div class="manage-content">
         <div class="common-part">
         </div>
-        <AddFiles/>
+        <router-view/>
       </div>
     </div>
   </div>
@@ -15,7 +15,8 @@
 <script lang="ts">
 import AsideMenu from '../components/aside/AsideMenu.vue';
 import AsideHeader from "../components/aside/AsideHeader.vue";
-import AddFiles from '../components/AddFiles.vue';
+import {onMounted} from "vue";
+import instance from "../ajax/interceptors";
 
 
 export default {
@@ -26,6 +27,21 @@ export default {
       isOpen = val
       console.log(val);
     };
+    onMounted(() => {
+      instance
+          .post('http://localhost:8183/api/hello',
+              null,
+              {timeout: 86400000, headers: {
+                  'Content-type': "application/json",
+                  "dataType": "json",
+                }})
+          .then((response: any) => {
+            alert(JSON.stringify(response));
+          }).catch((error) => {
+        alert(error.response);
+      })
+    })
+
     return {
       isOpen,
       setIsOpen
@@ -35,7 +51,6 @@ export default {
   components: {
     AsideMenu,
     AsideHeader,
-    AddFiles
   },
 }
 
