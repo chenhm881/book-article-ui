@@ -1,6 +1,6 @@
 
 export function getParamByName(name: string, url: string) {
-    const match = RegExp('[?#]' + name + '=([^&]*)').exec(url);
+    const match = RegExp('[?#|?&]' + name + '=([^&]*)').exec(url);
     return match && decodeURIComponent(match[1].replace(/\+/g, ' ').replace('#', ''));
 }
 

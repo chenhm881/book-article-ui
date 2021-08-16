@@ -3,26 +3,7 @@
         <a-icon class="toggle-icon" :type="isOpen?'menu-fold':'menu-unfold'" />
 
         <div class="right">
-            <div class="search-box">
-              <a-icon class="search-icon" @click="toggleInput(true)" type="search" />
-              <input
-                  class="search-input"
-                  :class="isOpenInput?'':'close'"
-                  @blur="toggleInput(false)"
-                  placeholder="站内搜索"
-                  type="text"
-              >
-            </div>
-            <a-tooltip placement="bottom" >
-                <template v-slot:title>
-                    <span>使用文档</span>
-                </template>
-                <a-icon class="help-icon" type="question-circle" />
-            </a-tooltip>
-            <span class="notice-box">
-                <i class="notice-nums">{{newsNum}}</i>
-                <a-icon class="notice-icon" type="bell" />
-            </span>
+
             <a-dropdown>
                 <span class="avadar-box">
                     <span>{{userName}}</span>
@@ -48,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { Tooltip, Dropdown, Menu } from 'ant-design-vue'
+import {Dropdown, Menu } from 'ant-design-vue'
 import {ref} from "vue";
 import {PlusOutlined} from "@ant-design/icons-vue";
 
@@ -70,7 +51,6 @@ export default {
   name: 'AsideHeader',
   components: {
     'a-icon': PlusOutlined,
-    'a-tooltip': Tooltip,
     'a-dropdown': Dropdown,
     'a-menu-item': Menu.Item,
     'a-menu-divider': Menu.Divider

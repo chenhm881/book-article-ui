@@ -1,5 +1,5 @@
 
-import { createRouter,createWebHashHistory} from "vue-router";
+import {createRouter, createWebHistory} from "vue-router";
 import form from "@/router/form";
 
 
@@ -18,6 +18,6 @@ const routes = [
 ]
 
 export default createRouter({
-  history: createWebHashHistory(),
-  routes: routes
+  history: createWebHistory(),
+  routes: routes,
 })

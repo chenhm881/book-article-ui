@@ -1,16 +1,16 @@
 <template>
-  <a-locale-provider :locale="locale" id="app">
+  <a-config-provider :locale="locale" id="app">
     <router-view/>
-  </a-locale-provider>
+  </a-config-provider>
 </template>
 
 <script>
 
-import { LocaleProvider } from 'ant-design-vue'
+import { ConfigProvider } from 'ant-design-vue'
 export default {
   name: 'App',
   components: {
-    'a-locale-provider': LocaleProvider
+    'a-config-provider': ConfigProvider
   }
 }
 

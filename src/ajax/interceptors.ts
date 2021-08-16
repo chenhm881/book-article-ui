@@ -20,12 +20,9 @@ instance.interceptors.request.use((config: any) => {
             config.headers["authorization"] = `bearer ${token}`;
             config.headers["Content-type"] = "application/json";
             document.cookie = `authorization=bearer ${token}`;
-            document.cookie = "user=" + getParamByName("access_token", window.location.href);
-
-
-
+            document.cookie = "user=" + getParamByName("Username", window.location.href);
         } else {
-            //window.location.href = "http://localhost:8771/oauth/authorize?client_id=blog&client_secret=123&redirect_uri=http://localhost:8062&response_type=token&scope=all&state=abc";
+            window.location.href = "http://localhost:8771/oauth/authorize?client_id=blog&client_secret=123&redirect_uri=http://localhost:8061&response_type=token&scope=all&state=abc";
         }
     }
     return config;
@@ -44,7 +41,7 @@ instance.interceptors.response.use(res => {
     //let code = error.response.status;
     if (error.response && error.response.status === 403) {
         console.log(error.response);
-        //window.location.href = "http://localhost:8771/oauth/authorize?client_id=blog&client_secret=123&redirect_uri=http://localhost:8062&response_type=token&scope=all&state=abc";
+        window.location.href = "http://localhost:8771/oauth/authorize?client_id=blog&client_secret=123&redirect_uri=http://localhost:8061&response_type=token&scope=all&state=abc";
     }
 });
 
