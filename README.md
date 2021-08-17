@@ -1,4 +1,4 @@
-# book-blog-ui
+# book-article-ui
 
 ## Project setup
 ```
